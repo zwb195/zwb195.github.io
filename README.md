@@ -1,2 +1,2 @@
 # zwb195.github.io
-http://zwb195.github.io.github.io
+http://zwb195.github.io

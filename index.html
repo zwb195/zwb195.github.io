@@ -1,8 +1,36 @@
-<p>Hello 大家好</p>
-<p>我是霸都丶傲天，这是我的个人网站。 </p>
-<p>很高兴你来到这里, 你可以在以下的网站找到我</p>
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+  </head>
+  <body>
 
-<ul>
-  <li> <a href="https://www.zhihu.com">知乎</a> </li>
-  <li> <a href="http://zwb195.github.io">我的博客(已经不更细了,现在在知乎写文章)</a> </li>
-</ul>
+    <div id="webgl-water-tutorial"> </div>
+
+    <script src='/webgl_water_tutorial.js'></script>
+
+    <script>
+    window.addEventListener('load', function () {
+      window.wasm_bindgen('/webgl_water_tutorial_bg.wasm')
+        .then(function () {
+          // Start our rust application. You can find `WebClient` in `src/lib.rs`
+          const webClient = new window.wasm_bindgen.WebClient()
+          webClient.start()
+
+          let time = Date.now();
+          function render () {
+            const dt = Date.now() - time
+
+            webClient.update(dt)
+            webClient.render()
+            window.requestAnimationFrame(render)
+
+            time = Date.now()
+          }
+
+          render()
+        })
+    })
+    </script>
+
+  </body>
+</html>
